@@ -3,7 +3,7 @@ import random
 import logging
 
 from pip import main 
-from utils import RandEdgeSampler, EarlyStopMonitor, MergeLayer
+from utils import EarlyStopMonitor
 import torch
 from torch_geometric.nn import GCNConv
 from torch_sparse import SparseTensor
@@ -172,9 +172,12 @@ def generate_submission(emb, dimension, topK, inviters_index):
 with open('./raw/A_for_users.json', 'r') as f:
     competition_A = json.load(f)
 
+with open('./processed/userid2num.json', 'r') as load_f:
+        userid2num = json.load(load_f)
+
 A_inviters_index = []
 for line in competition_A:
-    A_inviters_index.append(line['inviter_id'])
+    A_inviters_index.append(int(userid2num[line['inviter_id']]))
 early_stopper = EarlyStopMonitor()
 topK = 5
 
