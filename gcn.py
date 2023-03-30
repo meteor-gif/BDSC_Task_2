@@ -16,6 +16,7 @@ from dataset import MyOwnDataset
 import faiss
 from tqdm import tqdm
 import json
+import os
 
 from sklearn.metrics import average_precision_score
 from sklearn.metrics import f1_score
@@ -79,6 +80,18 @@ logger.info(args)
 train_data, validation_data = MyOwnDataset('./')
 
 device = torch.device('cuda')
+
+if not os.path.exists('./log'):
+    os.makedirs('./log')
+
+if not os.path.exists('./raw'):
+    os.makedirs('./raw')
+
+if not os.path.exists('./processed'):
+    os.makedirs('./processed')
+
+if not os.path.exists('./saved_embs'):
+    os.makedirs('./saved_embs')
 
 class Net(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels):
