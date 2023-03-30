@@ -7,5 +7,5 @@ Enviroment:
 torch=1.8.1
 torch-geometric=2.2.0
 faiss-cpu 1.7.3`.  
-To run the baseline:
+To run the baseline:  
 `python gcn.py`
